@@ -1,7 +1,7 @@
 ﻿<Solution>
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="AutoHandAssembly.csproj" />
   <Project Path="NaughtyAttributes.Core.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Autohand.Editor.csproj" />
   <Project Path="Autohand.MetaXR.csproj" />
   <Project Path="NaughtyAttributes.Editor.csproj" />

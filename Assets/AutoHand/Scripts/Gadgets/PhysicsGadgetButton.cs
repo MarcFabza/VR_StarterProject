@@ -13,6 +13,10 @@ namespace Autohand{
         public UnityEvent OnPressed;
         public UnityEvent OnUnpressed;
 
+        public GameObject textHighScore;
+        public GameObject textValue; 
+
+
         Vector3 startPos;
         Vector3 pressedPos;
         float pressedValue;
@@ -40,8 +44,13 @@ namespace Autohand{
             pressedValue = GetValue();
             pressedPos = transform.localPosition;
             OnPressed?.Invoke();
-            if(lockOnPressed)
+            if(lockOnPressed){
                 body.isKinematic = true;
+            }
+            Debug.Log("Button Pressed");
+
+            textHighScore.gameObject.SetActive(true);
+            textValue.gameObject.SetActive(true);
         }
 
         public void Unpressed(){
