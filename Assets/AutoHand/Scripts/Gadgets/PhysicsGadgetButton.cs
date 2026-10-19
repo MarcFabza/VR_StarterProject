@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using TMPro;
+using System.Collections;
 
 namespace Autohand{
-    //THIS MAY NOT WORK AS A GRABBABLE AT THIS TIME - Try PhysicsGadgetSlider instead
     public class PhysicsGadgetButton : PhysicsGadgetConfigurableLimitReader{
         bool pressed = false;
 
@@ -13,9 +15,11 @@ namespace Autohand{
         public UnityEvent OnPressed;
         public UnityEvent OnUnpressed;
 
-        public GameObject textHighScore;
-        public GameObject textValue; 
+        public GameObject textGameStartsIn;
+        public GameObject textStartCounter;
+        public string sceneName = "GameScene";
 
+        bool countdownStarted = false;
 
         Vector3 startPos;
         Vector3 pressedPos;
@@ -27,19 +31,20 @@ namespace Autohand{
             base.Start();
             startPos = transform.localPosition;
             body = joint.GetComponent<Rigidbody>();
-        }
 
+            textGameStartsIn.SetActive(false);
+            textStartCounter.SetActive(false);
+        }
 
         protected void FixedUpdate(){
             var value = GetValue();
-            if(!pressed && value+threshold >= 1) 
+            if(!pressed && value+threshold >= 1)
                 Pressed();
             else if(!lockOnPressed && pressed && value-threshold <= 0)
                 Unpressed();
         }
 
-
-        public void Pressed() {
+        public void Pressed(){
             pressed = true;
             pressedValue = GetValue();
             pressedPos = transform.localPosition;
@@ -49,8 +54,20 @@ namespace Autohand{
             }
             Debug.Log("Button Pressed");
 
-            textHighScore.gameObject.SetActive(true);
-            textValue.gameObject.SetActive(true);
+            if(countdownStarted) return;
+            countdownStarted = true;
+
+            textGameStartsIn.SetActive(true);
+            textStartCounter.SetActive(true);
+
+            textGameStartsIn.GetComponent<TMP_Text>().text = "Game Starts In:";
+            textStartCounter.GetComponent<TMP_Text>().text = "3";
+
+            GameObject helper = new GameObject("CountdownHelper");
+            CountdownRunner runner = helper.AddComponent<CountdownRunner>();
+            runner.counter = textStartCounter.GetComponent<TMP_Text>();
+            runner.sceneName = sceneName;
+            runner.StartCountdown();
         }
 
         public void Unpressed(){
@@ -58,10 +75,30 @@ namespace Autohand{
             OnUnpressed?.Invoke();
         }
 
-        public void Unlock() {
+        public void Unlock(){
             lockOnPressed = false;
             body.isKinematic = false;
             body.WakeUp();
+        }
+    }
+
+    public class CountdownRunner : MonoBehaviour{
+        public TMP_Text counter;
+        public string sceneName;
+
+        public void StartCountdown(){
+            StartCoroutine(Countdown());
+        }
+
+        IEnumerator Countdown(){
+            for(int i = 3; i >= 1; i--){
+                counter.text = i.ToString();
+                Debug.Log("Cuenta atrás: " + i);
+                yield return new WaitForSecondsRealtime(1f);
+            }
+
+            Debug.Log("Cargando escena " + sceneName);
+            SceneManager.LoadScene(sceneName);
         }
     }
 }

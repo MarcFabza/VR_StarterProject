@@ -1,59 +1,52 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using TMPro;
+using System.Collections;
 
 public class ButtonScript : MonoBehaviour
 {
+    public TMP_Text textGameStartsIn;   // Text_GameStartsIn
+    public TMP_Text textStartCounter;   // Text_StartCounter
 
-    public GameObject textHighScore;
-
-    public GameObject textValue;
-
-    public GameObject TimeText;
-
-    bool pressed = false;
+    private bool pressed = false;
 
     public UnityEvent OnPressed;
 
-
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        // Al inicio los dos textos están desactivados
+        textGameStartsIn.enabled = false;
+        textStartCounter.enabled = false;
     }
 
     public void Pressed()
     {
+        if (pressed) return;
+
         pressed = true;
+
+        // Al pulsar el botón se activan los dos textos
+        textGameStartsIn.enabled = true;
+        textStartCounter.enabled = true;
+
+        textGameStartsIn.text = "Game Starts In:";
+
         OnPressed?.Invoke();
 
-
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-        Debug.Log("Button Pressed");
-
-
-
-
+        StartCoroutine(Countdown());
     }
 
+    IEnumerator Countdown()
+    {
+        yield return new WaitForSeconds(3f);
+
+        for (int i = 3; i >= 1; i--)
+        {
+            textStartCounter.text = i.ToString();
+            yield return new WaitForSeconds(1f);
+        }
+
+        SceneManager.LoadScene("GameScene");
+    }
 }
