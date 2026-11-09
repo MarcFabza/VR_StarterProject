@@ -6,8 +6,8 @@ using System.Collections;
 
 public class ButtonScript : MonoBehaviour
 {
-    public TMP_Text textGameStartsIn;   // Text_GameStartsIn
-    public TMP_Text textStartCounter;   // Text_StartCounter
+    public TMP_Text textGameStartsIn;
+    public TMP_Text textStartCounter;
 
     private bool pressed = false;
 
@@ -15,7 +15,6 @@ public class ButtonScript : MonoBehaviour
 
     void Start()
     {
-        // Al inicio los dos textos están desactivados
         textGameStartsIn.enabled = false;
         textStartCounter.enabled = false;
     }
@@ -26,7 +25,6 @@ public class ButtonScript : MonoBehaviour
 
         pressed = true;
 
-        // Al pulsar el botón se activan los dos textos
         textGameStartsIn.enabled = true;
         textStartCounter.enabled = true;
 

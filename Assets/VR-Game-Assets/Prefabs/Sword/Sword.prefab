@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 4494892430502541708}
   - component: {fileID: 4494892430499674540}
   - component: {fileID: 4494892430500772716}
+  - component: {fileID: 7000000000000000002}
   m_Layer: 11
   m_Name: Sword
   m_TagString: Sword
@@ -5080,3 +5081,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &7000000000000000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4494892430502765996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163af01e5902456aa5f217b8d05d5425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

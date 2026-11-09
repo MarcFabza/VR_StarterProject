@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 564148659155542494}
   - component: {fileID: 3592119604490665573}
   - component: {fileID: 1580825343612072585}
+  - component: {fileID: 7000000000000000003}
   m_Layer: 0
   m_Name: GunCube
   m_TagString: Untagged
@@ -174,6 +175,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 564148659155542494}
     m_Modifications:
+    - target: {fileID: 11100000, guid: 5ffa061762077c44d92ba72a9866833e, type: 3}
+      propertyPath: m_PlayAutomatically
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100040, guid: 5ffa061762077c44d92ba72a9866833e, type: 3}
       propertyPath: m_Name
       value: CyberpunkCube_Shatter_Animation
@@ -396,3 +401,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400040, guid: 5ffa061762077c44d92ba72a9866833e, type: 3}
   m_PrefabInstance: {fileID: 4031010848909395764}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7000000000000000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9220460230358506278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99eb7b65f8794db699cad2d429c68ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCube: {fileID: 516068829924499889}
+  extraDestroyDelay: 0.2

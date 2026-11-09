@@ -181,7 +181,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4780613126747401452, guid: 5fe6ddd978f98334db23e9de98e4766c,
     type: 3}
   nozzleTransform: {fileID: 8158423210920815036}
-  sound_shoot: {fileID: 0}
+  sound_shoot: {fileID: 8158423210945799095}
+  shootClip: {fileID: 8300000, guid: da01a2dfd2a23a8468d394b15f96da0a, type: 3}
   sound_reload: {fileID: 0}
   ShootingButton: 8192
   slicerObject: {fileID: 0}

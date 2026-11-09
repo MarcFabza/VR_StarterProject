@@ -19,6 +19,15 @@ namespace Autohand{
         public GameObject textStartCounter;
         public string sceneName = "GameScene";
 
+        [Header("Best score")]
+        public GameObject textBestScore;
+        public string highScoreKey = "HighScore";
+        public float bestScoreY = 70f;
+
+        [Header("Sonido")]
+        public AudioClip clickSound;
+        [Range(0f, 1f)] public float clickVolume = 1f;
+
         bool countdownStarted = false;
 
         Vector3 startPos;
@@ -34,6 +43,19 @@ namespace Autohand{
 
             textGameStartsIn.SetActive(false);
             textStartCounter.SetActive(false);
+
+            ShowBestScore();
+        }
+
+        void ShowBestScore(){
+            if(textBestScore == null){
+                textBestScore = Instantiate(textGameStartsIn, textGameStartsIn.transform.parent);
+                textBestScore.name = "Text_BestScore";
+                textBestScore.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, bestScoreY);
+            }
+
+            textBestScore.SetActive(true);
+            textBestScore.GetComponent<TMP_Text>().text = "Best Score: " + PlayerPrefs.GetInt(highScoreKey, 0);
         }
 
         protected void FixedUpdate(){
@@ -56,6 +78,9 @@ namespace Autohand{
 
             if(countdownStarted) return;
             countdownStarted = true;
+
+            if(clickSound != null)
+                AudioSource.PlayClipAtPoint(clickSound, transform.position, clickVolume);
 
             textGameStartsIn.SetActive(true);
             textStartCounter.SetActive(true);

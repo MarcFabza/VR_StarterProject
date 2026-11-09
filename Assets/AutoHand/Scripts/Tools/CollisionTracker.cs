@@ -73,6 +73,8 @@ namespace Autohand {
         private void CheckTrackedObjects() {
             if(!disableCollisionTracking) {
                 for(int i = 0; i < collisionObjects.Count; i++) {
+                    if(collisionObjects[i] == null)
+                        continue;
                     if(!collisionObjects[i].activeInHierarchy ||
                         !nextCollisionObjects.Contains(collisionObjects[i])) {
                         if(OnCollisionLastExit != null)
@@ -99,6 +101,8 @@ namespace Autohand {
 
             if(!disableTriggersTracking) {
                 for(int i = 0; i < triggerObjects.Count; i++) {
+                    if(triggerObjects[i] == null)
+                        continue;
                     if(!triggerObjects[i].activeInHierarchy ||
                         !nextTriggerObjects.Contains(triggerObjects[i])) {
                         if(OnTriggerLastExit != null)
