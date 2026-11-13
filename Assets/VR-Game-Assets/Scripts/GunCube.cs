@@ -7,6 +7,14 @@ public class GunCube : MonoBehaviour
     public int points = 100;
 
     private bool exploded = false;
+    private Animation shatter;
+
+    void Awake()
+    {
+        shatter = GetComponentInChildren<Animation>(true);
+        if (shatter != null)
+            shatter.gameObject.SetActive(false);
+    }
 
     public bool Explode()
     {
@@ -32,11 +40,14 @@ public class GunCube : MonoBehaviour
             col.enabled = false;
 
         float delay = extraDestroyDelay;
-        Animation shatter = GetComponentInChildren<Animation>();
-        if (shatter != null && shatter.clip != null)
+        if (shatter != null)
         {
-            shatter.Play();
-            delay += shatter.clip.length;
+            shatter.gameObject.SetActive(true);
+            if (shatter.clip != null)
+            {
+                shatter.Play();
+                delay += shatter.clip.length;
+            }
         }
 
         CubeSpawner.DestroyCube(gameObject, delay);
